@@ -1,0 +1,8 @@
+
+Book menu:
+
+1. List all books
+2. Add new book
+0. Back to main menu
+
+

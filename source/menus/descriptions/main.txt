@@ -1,0 +1,18 @@
+
+Main menu:
+
+1. Books
+2. Authors
+3. Readers
+4. Orders
+5. Save library
+6. Generate library
+0. Exit
+
+Additional tasks:
+
+7. Who often takes the book
+8. What is the most popular book
+9. How many people ordered one of the three most popular books
+
+

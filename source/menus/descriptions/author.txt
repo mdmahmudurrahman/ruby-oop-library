@@ -1,0 +1,8 @@
+
+Author menu:
+
+1. List all authors
+2. Add new author
+0. Back to main menu
+
+

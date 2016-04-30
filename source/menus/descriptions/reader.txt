@@ -1,0 +1,8 @@
+
+Reader menu:
+
+1. List all readers
+2. Add new reader
+0. Back to main menu
+
+

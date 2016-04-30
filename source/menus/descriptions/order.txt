@@ -1,0 +1,8 @@
+
+Order menu:
+
+1. List all orders
+2. Add new order
+0. Back to main menu
+
+

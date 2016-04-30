@@ -1,0 +1,15 @@
+{	:
+books[o:	Book:@titleI"Title 1:ET:@authoro:Author:
+@nameI"Author 1;T:@biographyI"Biography 1;To;;I"Title 2;T;	o;
+;I"Author 2;T;I"Biography 2;To;;I"Title 3;T;	o;
+;I"Author 3;T;I"Biography 3;T:orders[o:
+Order:
+@book@:@readero:Reader
+;I"Reader 1;T:@emailI"Email 1;T:
+@cityI"City 1;T:@streetI"Street 1;T:@houseI"House 1;T:
+@dateI"19-04-2016;To;;@;@;I"18-04-2016;To;;@;o;
+;I"Reader 2;T;I"Email 2;T;I"City 2;T;I"Street 2;T;I"House 2;T;I"26-04-2036;To;;@;o;
+;I"Reader 3;T;I"Email 3;T;I"City 3;T;I"Street 3;T;I"House 3;T;I"09-04-2026;To;;@;o;
+;I"Reader 4;T;I"Email 4;T;I"City 4;T;I"Street 4;T;I"House 4;T;I"12-04-2046;To;;@;@;I"12-04-2046;To;;@;@";I"12-04-2046;To;;@;@;I"12-04-2046;To;;@;@";I"12-04-2046;To;;@;@*;I"12-04-2046;To;;@;@2;I"12-04-2046;To;;@;@2;I"12-04-2046;T:readers[
+@@"@*@2o;
+;I"Reader 5;T;I"Email 5;T;I"City 5;T;I"Street 5;T;I"House 5;T:authors[@	@@

@@ -1,4 +1,14 @@
-module Menu
+require 'singleton'
+
+class Menu
+  include Singleton
+
+  def initialize(commands)
+    @file = file
+    @commands = commands
+    @library = Library.instance
+  end
+
   def menu(name)
     print File.read "source/menus/descriptions/#{name}.txt"
     print 'Your choice: '
@@ -19,7 +29,7 @@ module Menu
   end
 
   def file
-    name.gsub('Menu', '').downcase
+    self.class.to_s.gsub('Menu', '').downcase
   end
 
   def run
@@ -28,6 +38,10 @@ module Menu
     while @continue
       parse menu @file
     end
+  end
+
+  def self.run
+    self.instance.run
   end
 
   def parse(command)

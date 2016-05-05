@@ -2,14 +2,12 @@ require 'entities/library'
 
 require 'menus/menu'
 
-module ReaderMenu
-  extend Menu
+class ReaderMenu < Menu
+  def initialize
+    super(commands)
+  end
 
-  @file = file
-  @continue = true
-  @library = Library.instance
-
-  def self.commands
+  def commands
     commands = super
     commands['1'] = :list_all_readers
     commands['2'] = :add_new_reader
@@ -17,13 +15,11 @@ module ReaderMenu
     commands
   end
 
-  @commands = commands
-
-  def self.list_all_readers
+  def list_all_readers
     list @library.readers, 'Readers'
   end
 
-  def self.choose_reader
+  def choose_reader
     list_all_readers
     puts
 
@@ -33,7 +29,7 @@ module ReaderMenu
     @library.readers[choice.to_i - 1]
   end
 
-  def self.add_new_reader
+  def add_new_reader
     print 'Enter name of the reader: '
     name = gets.chomp
 
@@ -52,7 +48,7 @@ module ReaderMenu
     @library.add Reader.new name, email, city, street, house
   end
 
-  private_class_method :commands
-  private_class_method :add_new_reader
-  private_class_method :list_all_readers
+  private :commands
+  private :add_new_reader
+  private :list_all_readers
 end

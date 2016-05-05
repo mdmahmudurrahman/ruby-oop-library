@@ -5,14 +5,12 @@ require 'menus/menu'
 require 'menus/implementations/book_menu'
 require 'menus/implementations/reader_menu'
 
-module OrderMenu
-  extend Menu
+class OrderMenu < Menu
+  def initialize
+    super(commands)
+  end
 
-  @file = file
-  @continue = true
-  @library = Library.instance
-
-  def self.commands
+  def commands
     commands = super
     commands['1'] = :list_all_orders
     commands['2'] = :add_new_order
@@ -20,15 +18,13 @@ module OrderMenu
     commands
   end
 
-  @commands = commands
-
-  def self.list_all_orders
+  def list_all_orders
     list @library.orders, 'Orders'
   end
 
-  def self.add_new_order
-    book = BookMenu.choose_book
-    reader = ReaderMenu.choose_reader
+  def add_new_order
+    book = BookMenu.instance.choose_book
+    reader = ReaderMenu.instance.choose_reader
 
     print 'Enter the date: '
     date = gets.chomp
@@ -36,7 +32,7 @@ module OrderMenu
     @library.add Order.new book, reader, date if book and reader
   end
 
-  private_class_method :commands
-  private_class_method :add_new_order
-  private_class_method :list_all_orders
+  private :commands
+  private :add_new_order
+  private :list_all_orders
 end

@@ -2,14 +2,12 @@ require 'entities/library'
 
 require 'menus/menu'
 
-module AuthorMenu
-  extend Menu
+class AuthorMenu < Menu
+  def initialize
+    super(commands)
+  end
 
-  @file = file
-  @continue = true
-  @library = Library.instance
-
-  def self.commands
+  def commands
     commands = super
     commands['1'] = :list_all_authors
     commands['2'] = :add_new_author
@@ -17,13 +15,11 @@ module AuthorMenu
     commands
   end
 
-  @commands = commands
-
-  def self.list_all_authors
+  def list_all_authors
     list @library.authors, 'Authors'
   end
 
-  def self.choose_author
+  def choose_author
     list_all_authors
     puts
 
@@ -33,7 +29,7 @@ module AuthorMenu
     @library.authors[choice.to_i - 1]
   end
 
-  def self.add_new_author
+  def add_new_author
     print 'Enter name of the author: '
     name = gets.chomp
 
@@ -43,7 +39,7 @@ module AuthorMenu
     @library.add Author.new name, biography
   end
 
-  private_class_method :commands
-  private_class_method :add_new_author
-  private_class_method :list_all_authors
+  private :commands
+  private :add_new_author
+  private :list_all_authors
 end

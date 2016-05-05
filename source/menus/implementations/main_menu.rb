@@ -55,19 +55,19 @@ module MainMenu
     author1 = Author.new 'Author 1', 'Biography 1'
     author2 = Author.new 'Author 2', 'Biography 2'
     author3 = Author.new 'Author 3', 'Biography 3'
-    @library.add_author author1, author2, author3
+    @library.add author1, author2, author3
 
     book1 = Book.new 'Title 1', author1
     book2 = Book.new 'Title 2', author2
     book3 = Book.new 'Title 3', author3
-    @library.add_book book1, book2, book3
+    @library.add book1, book2, book3
 
     reader1 = Reader.new 'Reader 1', 'Email 1', 'City 1', 'Street 1', 'House 1'
     reader2 = Reader.new 'Reader 2', 'Email 2', 'City 2', 'Street 2', 'House 2'
     reader3 = Reader.new 'Reader 3', 'Email 3', 'City 3', 'Street 3', 'House 3'
     reader4 = Reader.new 'Reader 4', 'Email 4', 'City 4', 'Street 4', 'House 4'
     reader5 = Reader.new 'Reader 5', 'Email 5', 'City 5', 'Street 5', 'House 5'
-    @library.add_reader reader1, reader2, reader3, reader4, reader5
+    @library.add reader1, reader2, reader3, reader4, reader5
 
     order1 = Order.new book1, reader1, '19-04-2016'
     order2 = Order.new book1, reader1, '18-04-2016'
@@ -84,7 +84,7 @@ module MainMenu
     order11 = Order.new book3, reader4, '12-04-2046'
     order12 = Order.new book3, reader4, '12-04-2046'
 
-    @library.add_order order1, order2, order3, order4, order5,
+    @library.add order1, order2, order3, order4, order5,
                        order6, order7, order8, order9, order10,
                        order11, order12
   end

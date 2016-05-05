@@ -40,7 +40,7 @@ module AuthorMenu
     print 'Enter biography of the author: '
     biography = gets.chomp
 
-    @library.add_author Author.new name, biography
+    @library.add Author.new name, biography
   end
 
   private_class_method :commands

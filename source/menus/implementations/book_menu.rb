@@ -29,7 +29,7 @@ module BookMenu
     title = gets.chomp
     author = AuthorMenu.choose_author
 
-    @library.add_book Book.new title, author if author
+    @library.add Book.new title, author if author
   end
 
   def self.choose_book

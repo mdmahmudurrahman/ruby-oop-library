@@ -33,7 +33,7 @@ module OrderMenu
     print 'Enter the date: '
     date = gets.chomp
 
-    @library.add_order Order.new book, reader, date if book and reader
+    @library.add Order.new book, reader, date if book and reader
   end
 
   private_class_method :commands

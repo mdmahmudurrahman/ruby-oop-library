@@ -49,7 +49,7 @@ module ReaderMenu
     print 'Enter house where reader lives: '
     house = gets.chomp
 
-    @library.add_reader Reader.new name, email, city, street, house
+    @library.add Reader.new name, email, city, street, house
   end
 
   private_class_method :commands

@@ -1,5 +1,5 @@
-require 'singleton'
 require 'set'
+require 'singleton'
 
 require 'entities/book'
 require 'entities/order'
@@ -12,34 +12,31 @@ class Library
   include Parser
   include Singleton
 
-  attr_reader :books
-  attr_reader :orders
-  attr_reader :readers
-  attr_reader :authors
+  @@entities = [
+      :books,
+      :orders,
+      :readers,
+      :authors
+  ]
+
+  attr_reader *@@entities
 
   def initialize
-    # data = Hash.new { |hash, key| hash[key] = Array.new }
-    data = read
-    @books = data[:books]
-    @orders = data[:orders]
-    @readers = data[:readers]
-    @authors = data[:authors]
+    read.tap do |data|
+      @@entities.each do |entity|
+        instance_variable_set "@#{entity}", data[entity]
+      end
+    end
   end
 
-  def add_book(*books)
-    @books += books
-  end
+  def add(*entities)
+    entities.each do |entity|
+      destination = "#{entity.class.to_s.downcase}s"
 
-  def add_order(*orders)
-    @orders += orders
-  end
-
-  def add_reader(*readers)
-    @readers += readers
-  end
-
-  def add_author(*authors)
-    @authors += authors
+      if @@entities.include? destination.to_sym
+        instance_eval "@#{destination} << entity"
+      end
+    end
   end
 
   def who_often_takes_the_book(book)
@@ -88,11 +85,12 @@ class Library
   end
 
   def save
-    data = Hash.new
-    data[:books] = @books
-    data[:orders] = @orders
-    data[:readers] = @readers
-    data[:authors] = @authors
+    data = Hash.new.tap do |hash|
+      @@entities.each do |entity|
+        hash[entity] = instance_variable_get "@#{entity}"
+      end
+    end
+
     write(data)
   end
 end

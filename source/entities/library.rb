@@ -1,4 +1,3 @@
-require 'set'
 require 'singleton'
 
 require 'entities/book'
@@ -36,48 +35,27 @@ class Library
   end
 
   def who_often_takes_the_book(book)
-    hash = Hash.new 0
-
-    @orders.each do |order|
-      if order.book == book
-        hash[order.reader] += 1
-      end
-    end
-
-    hash = hash.sort_by { |_, value| value }.to_h
-    hash.keys.last
+    @orders
+        .select { |order| order.book == book }
+        .group_by { |order| order.reader }
+        .sort_by { |_, orders| orders.size }
+        .to_h.keys.last
   end
 
   def what_is_the_most_popular_book
-    n_most_popular_book 1
+    n_most_popular_book(1).first
   end
 
   def how_many_people_ordered_one_of_the_three_most_popular_books
     books = n_most_popular_book 3
-    readers = Set.new
-
-    @orders.each do |order|
-      if books.include? order.book
-        readers << order.reader
-      end
-    end
-
-    readers
+    @orders.collect { |order| order.reader if books.include? order.book }.uniq
   end
 
   def n_most_popular_book(number)
-    hash = Hash.new 0
-
-    @orders.each { |order| hash[order.book] += 1 }
-    hash = hash.sort_by { |_, value| value }.to_h
-
-    if number == 1
-      hash.keys.last
-    elsif number > hash.length
-      hash.keys
-    else
-      hash.keys[-number, number]
-    end
+    @orders
+        .group_by { |order| order.book }
+        .sort_by { |_, orders| orders.size }
+        .to_h.keys.reverse.take number
   end
 
   def load

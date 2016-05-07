@@ -22,18 +22,14 @@ class Library
   attr_reader *@@entities
 
   def initialize
-    read.tap do |data|
-      @@entities.each do |entity|
-        instance_variable_set "@#{entity}", data[entity]
-      end
-    end
+    load
   end
 
   def add(*entities)
     entities.each do |entity|
-      destination = "#{entity.class.to_s.downcase}s"
+      destination = "#{entity.class.to_s.downcase}s".to_sym
 
-      if @@entities.include? destination.to_sym
+      if @@entities.include? destination
         instance_eval "@#{destination} << entity"
       end
     end
@@ -84,13 +80,25 @@ class Library
     end
   end
 
+  def load
+    disassemble read
+  end
+
   def save
-    data = Hash.new.tap do |hash|
-      @@entities.each do |entity|
-        hash[entity] = instance_variable_get "@#{entity}"
-      end
+    write assemble Hash.new
+  end
+
+  def assemble(hash)
+    @@entities.each do |entity|
+      hash[entity] = instance_variable_get "@#{entity}"
     end
 
-    write(data)
+    hash
+  end
+
+  def disassemble(data)
+    @@entities.each do |entity|
+      instance_variable_set "@#{entity}", data[entity]
+    end
   end
 end

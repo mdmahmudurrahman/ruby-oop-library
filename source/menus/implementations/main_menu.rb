@@ -88,7 +88,7 @@ class MainMenu < Menu
   end
 
   def who_often_takes_the_book
-    if (book = BookMenu.choose_book)
+    if (book = BookMenu.instance.choose_book)
       reader = @library.who_often_takes_the_book book
       puts "Who often takes the Book: #{reader.inspect}" if reader
     end

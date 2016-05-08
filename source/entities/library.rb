@@ -35,15 +35,12 @@ class Library
   end
 
   def who_often_takes_the_book(book)
-    @orders
-        .select { |order| order.book == book }
-        .group_by { |order| order.reader }
-        .sort_by { |_, orders| orders.size }
-        .to_h.keys.last
+    @orders.select { |order| order.book == book }.group_by(&:reader)
+        .sort_by { |_, orders| orders.size }.to_h.keys.last
   end
 
   def what_is_the_most_popular_book
-    n_most_popular_book(1).first
+    n_most_popular_book(1)&.first
   end
 
   def how_many_people_ordered_one_of_the_three_most_popular_books
@@ -52,10 +49,7 @@ class Library
   end
 
   def n_most_popular_book(number)
-    @orders
-        .group_by { |order| order.book }
-        .sort_by { |_, orders| orders.size }
-        .to_h.keys.reverse.take number
+    @orders.group_by(&:book).max_by(number) { |_, orders| orders.size }.to_h.keys
   end
 
   def load

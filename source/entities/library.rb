@@ -45,7 +45,7 @@ class Library
 
   def how_many_people_ordered_one_of_the_three_most_popular_books
     books = n_most_popular_book 3
-    @orders.collect { |order| order.reader if books.include? order.book }.uniq
+    @orders.collect { |order| order.reader if books.include? order.book }.compact.uniq
   end
 
   def n_most_popular_book(number)
